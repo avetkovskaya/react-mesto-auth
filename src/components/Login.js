@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import "../index.css";
+import { useEffect, useState } from 'react';
+import '../index.css';
 
 function Login({ onLogin, setLoggedForm }) {
   const cleanUserData = {
-    password: "",
-    email: "",
+    password: '',
+    email: '',
   };
 
   useEffect(() => {
@@ -20,8 +20,10 @@ function Login({ onLogin, setLoggedForm }) {
       [name]: value,
     }));
   }
+
   function handleSubmit(e) {
     e.preventDefault();
+
     const { email, password } = userData;
 
     if (!email || !password) return;
@@ -30,7 +32,7 @@ function Login({ onLogin, setLoggedForm }) {
       console.log(err);
       setUserData((old) => ({
         ...old,
-        message: "Что-то пошло не так!",
+        message: 'Что-то пошло не так!',
       }));
     });
   }
@@ -58,14 +60,11 @@ function Login({ onLogin, setLoggedForm }) {
         value={userData.password}
         onChange={handleChange}
       />
-      <button
-        className="form__submit form__submit_for_authorize"
-        type="submit"
-        onSubmit={handleSubmit}
-      >
+      <button className="form__submit form__submit_for_authorize" type="submit" onSubmit={handleSubmit}>
         Войти
       </button>
     </form>
   );
 }
+
 export default Login;

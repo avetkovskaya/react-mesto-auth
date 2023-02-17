@@ -94,7 +94,6 @@ class Api {
       : this._deleteFetch(`/cards/${id}/likes`);
   }
 }
-
 export const api = new Api("https://mesto.nomoreparties.co/v1/cohort-47", {
   authorization: "3d7acd9e-e1f9-4588-b91d-6f509dcd8011",
   "Content-Type": "application/json",

@@ -1,9 +1,10 @@
-export const BASE_URL = "https://auth.nomoreparties.co/";
-function request({ url, method = "POST", data, token }) {
+export const BASE_URL = 'https://auth.nomoreparties.co/';
+
+function request({ url, method = 'POST', data, token }) {
   return fetch(`${BASE_URL}${url}`, {
     method: method,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       ...(!!token && { Authorization: `Bearer ${token}` }),
     },
     ...(!!data && { body: JSON.stringify(data) }),
@@ -17,22 +18,22 @@ function request({ url, method = "POST", data, token }) {
 
 export const authorize = (password, email) => {
   return request({
-    url: "signin",
+    url: 'signin',
     data: { password, email },
   });
 };
 
 export const register = (password, email) => {
   return request({
-    url: "signup",
+    url: 'signup',
     data: { password, email },
   });
 };
 
 export const checkToken = (token) => {
   return request({
-    url: "users/me",
-    method: "GET",
+    url: 'users/me',
+    method: 'GET',
     token: token,
   });
 };

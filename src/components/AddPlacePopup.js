@@ -1,17 +1,17 @@
-import PopupWithForm from "./PopupWithForm";
-import { useEffect, useState } from "react";
+import PopupWithForm from './PopupWithForm';
+import { useEffect, useState } from 'react';
 
 export function AddPlacePopup({ isOpen, onClose, onAddCard }) {
-  const [nameCard, setNameCard] = useState("");
-  const [linkCard, setLinkCard] = useState("");
+  const [nameCard, setNameCard] = useState('');
+  const [linkCard, setLinkCard] = useState('');
 
   useEffect(() => {
-    setNameCard("");
-    setLinkCard("");
+    setNameCard('');
+    setLinkCard('');
   }, [isOpen]);
 
   function handleValueChange(evt) {
-    if (evt.target.name === "name") {
+    if (evt.target.name === 'name') {
       setNameCard(evt.target.value);
     } else {
       setLinkCard(evt.target.value);
@@ -43,7 +43,7 @@ export function AddPlacePopup({ isOpen, onClose, onAddCard }) {
         type="text"
         minLength="2"
         maxLength="30"
-        value={nameCard || ""}
+        value={nameCard || ''}
         onChange={handleValueChange}
         required
       />
@@ -54,7 +54,7 @@ export function AddPlacePopup({ isOpen, onClose, onAddCard }) {
         id="link-img-input"
         placeholder="Ссылка на картинку"
         type="url"
-        value={linkCard || ""}
+        value={linkCard || ''}
         onChange={handleValueChange}
         required
       />
