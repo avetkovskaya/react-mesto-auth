@@ -1,0 +1,11 @@
+.form__title_for_authorize {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .form__title_for_authorize {
+    font-size: 20px;
+    line-height: 24px;
