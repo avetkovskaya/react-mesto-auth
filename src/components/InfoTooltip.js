@@ -1,4 +1,4 @@
-function PopupWithState({ resStatus, isOpen, onClose, authMessage }) {
+function InfoTooltip({ resStatus, isOpen, onClose, authMessage }) {
   return (
     <div className={`popup popup_for_state ${isOpen && 'popup_visible'}`} onClick={onClose}>
       <div
@@ -15,4 +15,4 @@ function PopupWithState({ resStatus, isOpen, onClose, authMessage }) {
   );
 }
 
-export default PopupWithState;
+export default InfoTooltip;

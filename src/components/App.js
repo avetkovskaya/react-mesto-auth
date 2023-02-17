@@ -15,7 +15,7 @@ import { EditProfilePopup } from './EditProfilePopup';
 import { EditAvatarPopup } from './EditAvatarPopup';
 import { AddPlacePopup } from './AddPlacePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import PopupWithState from './PopupWithState';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -255,7 +255,7 @@ function App() {
           onClose={closeAllPopups}
           isOpen={isImagePopupOpen}
         />
-        <PopupWithState
+        <InfoTooltip
           authMessage={authMessage}
           onClose={closeAllPopups}
           isOpen={isStatePopupOpen}
