@@ -3,7 +3,7 @@
   height: max-content;
   padding-bottom: 68px;
   display: grid;
-  grid-template: grid-template: repeat(auto-fill, minmax(max-content, 361px)) / repeat(auto-fill, minmax(270px, auto));
+  grid-template:repeat(auto-fill, minmax(max-content, 361px)) / repeat(auto-fill, minmax(270px, auto));
   gap: 20px 17px;
 }
 
