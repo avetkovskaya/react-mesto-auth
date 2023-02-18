@@ -1,21 +1,21 @@
-import '../index.css';
-import { useState, useEffect } from 'react';
-import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
-import { api } from '../utils/Api';
-import * as auth from '../utils/auth';
-import Header from './Header';
-import ProtectedRoute from './ProtectedRoute';
-import Main from './Main';
-import Register from './Register';
-import Login from './Login';
-import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
-import { EditProfilePopup } from './EditProfilePopup';
-import { EditAvatarPopup } from './EditAvatarPopup';
-import { AddPlacePopup } from './AddPlacePopup';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import InfoTooltip from './InfoTooltip';
+import "../index.css";
+import { useState, useEffect } from "react";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { api } from "../utils/Api";
+import * as auth from "../utils/auth";
+import Header from "./Header";
+import ProtectedRoute from "./ProtectedRoute";
+import Main from "./Main";
+import Register from "./Register";
+import Login from "./Login";
+import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
+import { EditProfilePopup } from "./EditProfilePopup";
+import { EditAvatarPopup } from "./EditAvatarPopup";
+import { AddPlacePopup } from "./AddPlacePopup";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -23,14 +23,14 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isStatePopupOpen, setIsStatePopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
-  const [authMessage, setAuthMessage] = useState('');
+  const [authMessage, setAuthMessage] = useState("");
   const [menuActivity, setMenuActivity] = useState(false);
   const [resStatus, setResStatus] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loggedForm, setLoggedForm] = useState('');
+  const [loggedForm, setLoggedForm] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState("");
   const [cards, setCards] = useState([]);
   const history = useHistory();
 
@@ -65,7 +65,9 @@ function App() {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -95,6 +97,26 @@ function App() {
     setImagePopupOpen(false);
     setIsStatePopupOpen(false);
   }
+
+  const isOpen =
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    isImagePopupOpen;
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
+      return () => {
+        document.removeEventListener("keydown", closeByEscape);
+      };
+    }
+  }, [isOpen]);
 
   function handleUpdateUser(data) {
     api
@@ -137,15 +159,15 @@ function App() {
       .authorize(password, email)
       .then((data) => {
         if (!data.token) return;
-        
-        setAuthMessage('Вы успешно вошли!');
+
+        setAuthMessage("Вы успешно вошли!");
         setIsStatePopupOpen(true);
         setResStatus(true);
         setUserEmail(email);
         setLoggedIn(true);
-        localStorage.setItem('jwt', data.token);
-        history.push('/');
-        if (history.location.pathname === '/') {
+        localStorage.setItem("jwt", data.token);
+        history.push("/");
+        if (history.location.pathname === "/") {
           setMenuActivity(false);
         }
       })
@@ -162,10 +184,10 @@ function App() {
       .register(password, email)
       .then((res) => {
         if (res) {
-          history.push('/sign-in');
+          history.push("/sign-in");
           setIsStatePopupOpen(true);
           setResStatus(true);
-          setAuthMessage('Регистрация успешно выполнена!')
+          setAuthMessage("Регистрация успешно выполнена!");
         }
       })
       .catch((err) => {
@@ -176,15 +198,15 @@ function App() {
   }
 
   function handleLogout() {
-    setUserEmail('');
+    setUserEmail("");
     setLoggedIn(false);
-    localStorage.removeItem('jwt');
-    history.push('/sign-in');
+    localStorage.removeItem("jwt");
+    history.push("/sign-in");
     setMenuActivity(false);
   }
 
   function getContent() {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
 
     if (!jwt) return;
 
@@ -194,7 +216,7 @@ function App() {
         if (res) {
           setUserEmail(res.data.email);
           setLoggedIn(true);
-          history.push('/');
+          history.push("/");
         }
       })
       .catch((err) => console.log(err));
@@ -202,9 +224,9 @@ function App() {
 
   function handleAuthorization() {
     if (loggedForm) {
-      history.push('/sign-up');
+      history.push("/sign-up");
     } else {
-      history.push('/sign-in');
+      history.push("/sign-in");
     }
   }
 
@@ -237,18 +259,43 @@ function App() {
             />
           </ProtectedRoute>
           <Route exact path="/sign-up">
-            <Register onRegister={handleRegister} setLoggedForm={setLoggedForm} />
+            <Register
+              onRegister={handleRegister}
+              setLoggedForm={setLoggedForm}
+            />
           </Route>
           <Route exact path="/sign-in">
-            <Login onLogin={handleLogin} loggedIn={loggedIn} setLoggedForm={setLoggedForm} />
+            <Login
+              onLogin={handleLogin}
+              loggedIn={loggedIn}
+              setLoggedForm={setLoggedForm}
+            />
           </Route>
-          <Route path="*">{loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}</Route>
+          <Route path="*">
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          </Route>
         </Switch>
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddCard} />
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        <PopupWithForm popupName="remove-card" title="Вы уверены?" buttonText="Да"></PopupWithForm>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddCard={handleAddCard}
+        />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        <PopupWithForm
+          popupName="remove-card"
+          title="Вы уверены?"
+          buttonText="Да"
+        ></PopupWithForm>
         <ImagePopup
           popupName="scale-image"
           selectedCard={selectedCard}

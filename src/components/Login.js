@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import '../index.css';
+import { useEffect, useState } from "react";
+import "../index.css";
 
 function Login({ onLogin, setLoggedForm }) {
   const cleanUserData = {
-    password: '',
-    email: '',
+    password: "",
+    email: "",
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Login({ onLogin, setLoggedForm }) {
       console.log(err);
       setUserData((old) => ({
         ...old,
-        message: 'Что-то пошло не так!',
+        message: "Что-то пошло не так!",
       }));
     });
   }
@@ -60,6 +60,9 @@ function Login({ onLogin, setLoggedForm }) {
         value={userData.password}
         onChange={handleChange}
       />
+      <button className="form__submit form__submit_for_authorize" type="submit">
+        Войти
+      </button>
     </form>
   );
 }
