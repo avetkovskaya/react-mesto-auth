@@ -60,9 +60,6 @@ function Login({ onLogin, setLoggedForm }) {
         value={userData.password}
         onChange={handleChange}
       />
-      <button className="form__submit form__submit_for_authorize" type="submit" onSubmit={handleSubmit}>
-        Войти
-      </button>
     </form>
   );
 }
