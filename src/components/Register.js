@@ -57,6 +57,9 @@ function Register({ onRegister, setLoggedForm }) {
         value={userData.password}
         onChange={handleChange}
       />
+       <button className="form__submit form__submit_for_authorize" type="submit">
+        Войти
+      </button>
       <p className="form__signin">
         Уже зарегистрированы?&nbsp;
         <Link className="form__login-link" to="/sign-in">
